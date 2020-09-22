@@ -26,7 +26,7 @@ variable "volumes" {
       location = "nbg1"
       size     = 10
       format   = "xfs"
-      labels   = null
+      labels   = {}
     }
   ]
 
