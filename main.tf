@@ -1,6 +1,6 @@
-# ====================================
-# Manages volumes in the Hetzner Cloud
-# ====================================
+# ===================================
+# Manage volumes in the Hetzner Cloud
+# ===================================
 
 
 # ------------
@@ -8,9 +8,16 @@
 # ------------
 
 locals {
-  # Build a map of all provided volume objects, indexed by volume name
-  volumes = {
+  # Build a map of all provided volume objects, indexed by volume name:
+  volumes     = {
     for volume in var.volumes : volume.name => volume
+  }
+
+  # Build a map of all provided volume objects to be attached, indexed
+  # by volume name and server ID:
+  attachments = {
+    for volume in local.volumes : "${volume.name}:${volume.server_id}" => volume
+      if(lookup(volume, "server_id", null) != null && volume.server_id != "")
   }
 }
 
@@ -28,4 +35,17 @@ resource "hcloud_volume" "volumes" {
   format   = each.value.format
 
   labels   = each.value.labels
+}
+
+
+# ------------------
+# Volume Attachments
+# ------------------
+
+resource "hcloud_volume_attachment" "attachments" {
+  for_each  = local.attachments
+
+  server_id = each.value.server_id
+  volume_id = hcloud_volume.volumes[each.value.name].id
+  automount = each.value.automount
 }
