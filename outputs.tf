@@ -24,12 +24,7 @@ output "volume_names" {
 output "volumes" {
   description = "A list of all volume objects."
   value       = [
-    for volume in hcloud_volume.volumes : merge(volume, {
-      "attachments" = [
-        for attachment in hcloud_volume_attachment.attachments : attachment
-          if(tostring(attachment.volume_id) == volume.id)
-      ]
-    })
+    for name, volume in hcloud_volume.volumes : volume
   ]
 }
 
@@ -54,7 +49,7 @@ output "volume_attachments" {
   value       = [
     for name, attachment in hcloud_volume_attachment.attachments :
       merge(attachment, {
-        "volume_name" = local.attachments[name].name
+        "volume_name" = lookup(lookup(local.attachments, name, {}), "name", null)
       })
   ]
 }
