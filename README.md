@@ -9,8 +9,8 @@
 
 It implements the following [provider](#providers) resources:
 
-- [hcloud_volume](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume)
-- [hcloud_volume_attachment](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume_attachment)
+- [hcloud\_volume](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume)
+- [hcloud\_volume\_attachment](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume_attachment)
 
 
 ## Usage
@@ -65,7 +65,7 @@ See [examples](https://github.com/peterpramb/terraform-hcloud-volumes/blob/maste
 | Name | Description | Type | Required |
 |------|-------------|:----:|:--------:|
 | [name](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume#name) | Unique name of the volume. | string | yes |
-| [location](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume#location) | Location of the volume to create. | string | yes |
+| [location](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume#location) | Location of the volume. | string | yes |
 | [size](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume#size) | Size of the volume (in GB). | number | yes |
 | [automount](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume_attachment#automount) | Automount the volume on attachment. | bool | no |
 | [format](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume#format) | Format volume after creation. | string | no |
