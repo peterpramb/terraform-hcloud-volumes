@@ -14,10 +14,11 @@ locals {
   }
 
   # Build a map of all provided volume objects to be attached, indexed
-  # by volume name and server ID:
+  # by volume name:
   attachments = {
-    for volume in local.volumes : "${volume.name}:${volume.server_id}" => volume
-      if(lookup(volume, "server_id", null) != null && volume.server_id != "")
+    for volume in local.volumes : volume.name => merge(volume, {
+      "volume" = volume.name
+    }) if(try(volume.server_id, null) != null && volume.server_id != "")
   }
 }
 

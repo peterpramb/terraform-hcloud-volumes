@@ -94,27 +94,20 @@ volumes = [
 
 | Name | Description |
 |------|-------------|
-| volume\_ids | Map of all volume IDs and associated names. |
-| volume\_names | Map of all volume names and associated IDs. |
 | volumes | List of all volume objects. |
-| volume\_attachment\_ids | Map of all volume attachment IDs and associated names. |
-| volume\_attachment\_names | Map of all volume attachment names and associated IDs. |
+| volume\_ids | Map of all volume objects indexed by ID. |
+| volume\_names | Map of all volume objects indexed by name. |
 | volume\_attachments | List of all volume attachment objects. |
+| volume\_attachment\_ids | Map of all volume attachment objects indexed by ID. |
+| volume\_attachment\_names | Map of all volume attachment objects indexed by name. |
 
 
 ### Defaults
 
 ```terraform
-volume_ids = {
-  "7285086" = "volume-nbg1-1"
-}
-
-volume_names = {
-  "volume-nbg1-1" = "7285086"
-}
-
 volumes = [
   {
+    "attachment" = {}
     "format" = "xfs"
     "id" = "7285086"
     "linux_device" = "/dev/disk/by-id/scsi-0HC_Volume_7285086"
@@ -124,11 +117,35 @@ volumes = [
   },
 ]
 
+volume_ids = {
+  "7285086" = {
+    "attachment" = {}
+    "format" = "xfs"
+    "id" = "7285086"
+    "linux_device" = "/dev/disk/by-id/scsi-0HC_Volume_7285086"
+    "location" = "nbg1"
+    "name" = "volume-nbg1-1"
+    "size" = 10
+  }
+}
+
+volume_names = {
+  "volume-nbg1-1" = {
+    "attachment" = {}
+    "format" = "xfs"
+    "id" = "7285086"
+    "linux_device" = "/dev/disk/by-id/scsi-0HC_Volume_7285086"
+    "location" = "nbg1"
+    "name" = "volume-nbg1-1"
+    "size" = 10
+  }
+}
+
+volume_attachments = []
+
 volume_attachment_ids = {}
 
 volume_attachment_names = {}
-
-volume_attachments = []
 ```
 
 
