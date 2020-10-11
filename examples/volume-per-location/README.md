@@ -2,9 +2,9 @@
 
 This folder shows an example of [Terraform](https://www.terraform.io) code that uses the [terraform-hcloud-volumes](https://github.com/peterpramb/terraform-hcloud-volumes) module to manage one volume per location in the [Hetzner Cloud](https://www.hetzner.com/cloud).
 
-**IMPORTANT**: This example points to the master branch of the module for simplicity. In your code, you should always pin to a specific official release.
+:information\_source: **IMPORTANT**: This example points to the master branch of the module for simplicity. In your code, you should always pin to a specific official release.
 
-**WARNING**: This example might produce additional costs. Ensure that you remove the resources again when done.
+:warning: **WARNING**: This example might produce additional costs. Ensure that you remove the resources again when done.
 
 
 ## Quick Start
