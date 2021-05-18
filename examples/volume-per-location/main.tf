@@ -8,7 +8,7 @@
 # ------------
 
 locals {
-  # Enrich user configuration for volume module
+  # Enrich user configuration for volume module:
   volumes = [
     for location in data.hcloud_locations.all.names : {
       "name"      = "volume-${location}-1"
