@@ -16,9 +16,10 @@ locals {
   # Build a map of all provided volume objects to be attached, indexed
   # by volume name:
   attachments = {
-    for volume in local.volumes : volume.name => merge(volume, {
-      "volume" = volume.name
-    }) if(try(volume.server_id, null) != null && volume.server_id != "")
+    for volume in local.volumes :
+      "${volume.name}:${volume.server.name}" => merge(volume, {
+        "volume" = volume.name
+      }) if(try(volume.server.name, null) != null)
   }
 }
 
@@ -46,7 +47,7 @@ resource "hcloud_volume" "volumes" {
 resource "hcloud_volume_attachment" "attachments" {
   for_each  = local.attachments
 
-  server_id = each.value.server_id
+  server_id = each.value.server.id
   volume_id = hcloud_volume.volumes[each.value.name].id
-  automount = each.value.automount
+  automount = each.value.server.automount
 }

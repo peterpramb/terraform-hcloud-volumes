@@ -8,17 +8,20 @@
 # ---------------
 
 variable "volumes" {
-  description = "The list of volume objects to be managed. Each volume object supports the following parameters: 'name' (string, required), 'location' (string, required), 'size' (number, required), 'automount' (bool, optional), 'format' (string, optional), 'server_id' (string, optional), 'labels' (map of KV pairs, optional)."
+  description = "The list of volume objects to be managed. Each volume object supports the following parameters: 'name' (string, required), 'location' (string, required), 'size' (number, required), 'format' (string, optional), 'server' (server object, optional), 'labels' (map of KV pairs, optional). The server object supports the following parameters: 'name' (string, required), 'id' (string, required), 'automount' (bool, optional)."
 
   type        = list(
     object({
-      name      = string
-      location  = string
-      size      = number
-      automount = bool
-      format    = string
-      server_id = string
-      labels    = map(string)
+      name     = string
+      location = string
+      size     = number
+      format   = string
+      server   = object({
+        name      = string
+        id        = string
+        automount = bool
+      })
+      labels   = map(string)
     })
   )
 
@@ -29,7 +32,7 @@ variable "volumes" {
       size      = 10
       automount = false
       format    = "xfs"
-      server_id = null
+      server    = null
       labels    = {}
     }
   ]

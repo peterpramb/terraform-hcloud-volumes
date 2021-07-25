@@ -21,13 +21,16 @@ module "volume" {
 
   volumes = [
     {
-      name      = "volume-nbg1-1"
-      location  = "nbg1"
-      size      = 10
-      automount = true
-      format    = "xfs"
-      server_id = "7569968"
-      labels    = {
+      name     = "volume-nbg1-1"
+      location = "nbg1"
+      size     = 10
+      format   = "xfs"
+      server   = {
+        "name"      = "server-1"
+        "id"        = "7569968"
+        "automount" = true
+      }
+      labels   = {
         "managed"    = "true"
         "managed_by" = "Terraform"
       }
@@ -67,10 +70,18 @@ See [examples](https://github.com/peterpramb/terraform-hcloud-volumes/blob/maste
 | [name](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume#name) | Unique name of the volume. | string | yes |
 | [location](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume#location) | Location of the volume. | string | yes |
 | [size](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume#size) | Size of the volume (in GB). | number | yes |
-| [automount](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume_attachment#automount) | Automount the volume on attachment. | bool | no |
 | [format](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume#format) | Format volume after creation. | string | no |
-| [server\_id](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume_attachment#server_id) | Server to attach the volume to. | string | no |
+| server | Inputs for server attachment. | map([*server*](#server)) | no |
 | [labels](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume#labels) | Map of user-defined labels. | map(string) | no |
+
+
+#### *server*
+
+| Name | Description | Type | Required |
+|------|-------------|:----:|:--------:|
+| [name](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/server#name) | Name of the server to attach the volume to. | string | yes |
+| [id](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume_attachment#server_id) | ID of the server to attach the volume to. | string | yes |
+| [automount](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume_attachment#automount) | Automount the volume on attachment. | bool | no |
 
 
 ### Defaults
@@ -78,13 +89,12 @@ See [examples](https://github.com/peterpramb/terraform-hcloud-volumes/blob/maste
 ```terraform
 volumes = [
   {
-    name      = "volume-nbg1-1"
-    location  = "nbg1"
-    size      = 10
-    automount = false
-    format    = "xfs"
-    server_id = null
-    labels    = {}
+    name     = "volume-nbg1-1"
+    location = "nbg1"
+    size     = 10
+    format   = "xfs"
+    server   = null
+    labels   = {}
   }
 ]
 ```
