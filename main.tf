@@ -14,7 +14,7 @@ locals {
   }
 
   # Build a map of all provided volume objects to be attached, indexed
-  # by volume name:
+  # by volume and server names:
   attachments = {
     for volume in local.volumes :
       "${volume.name}:${volume.server.name}" => merge(volume, {
