@@ -8,32 +8,34 @@
 # ---------------
 
 variable "volumes" {
-  description = "The list of volume objects to be managed. Each volume object supports the following parameters: 'name' (string, required), 'location' (string, required), 'size' (number, required), 'format' (string, optional), 'server' (server object, optional), 'labels' (map of KV pairs, optional). The server object supports the following parameters: 'name' (string, required), 'id' (string, required), 'automount' (bool, optional)."
+  description = "The list of volume objects to be managed. Each volume object supports the following parameters: 'name' (string, required), 'location' (string, required), 'size' (number, required), 'format' (string, optional), 'protection' (bool, optional), 'server' (server object, optional), 'labels' (map of KV pairs, optional). The server object supports the following parameters: 'name' (string, required), 'id' (string, required), 'automount' (bool, optional)."
 
   type        = list(
     object({
-      name     = string
-      location = string
-      size     = number
-      format   = string
-      server   = object({
+      name       = string
+      location   = string
+      size       = number
+      format     = string
+      protection = bool
+      server     = object({
         name      = string
         id        = string
         automount = bool
       })
-      labels   = map(string)
+      labels     = map(string)
     })
   )
 
   default     = [
     {
-      name      = "volume-nbg1-1"
-      location  = "nbg1"
-      size      = 10
-      automount = false
-      format    = "xfs"
-      server    = null
-      labels    = {}
+      name       = "volume-nbg1-1"
+      location   = "nbg1"
+      size       = 10
+      automount  = false
+      format     = "xfs"
+      protection = false
+      server     = null
+      labels     = {}
     }
   ]
 

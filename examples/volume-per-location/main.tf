@@ -11,12 +11,13 @@ locals {
   # Enrich user configuration for volume module:
   volumes = [
     for location in data.hcloud_locations.all.names : {
-      "name"     = "volume-${location}-1"
-      "location" = location
-      "size"     = var.volume_size
-      "format"   = var.volume_format
-      "server"   = null
-      "labels"   = var.labels
+      "name"        = "volume-${location}-1"
+      "location"    = location
+      "size"        = var.volume_size
+      "format"      = var.volume_format
+      "protection"  = false
+      "server"      = null
+      "labels"      = var.labels
     }
   ]
 }

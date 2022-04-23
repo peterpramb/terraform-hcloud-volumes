@@ -29,14 +29,15 @@ locals {
 # -------
 
 resource "hcloud_volume" "volumes" {
-  for_each = local.volumes
+  for_each          = local.volumes
 
-  name     = each.value.name
-  location = each.value.location
-  size     = each.value.size
-  format   = each.value.format
+  name              = each.value.name
+  location          = each.value.location
+  size              = each.value.size
+  format            = each.value.format
+  delete_protection = each.value.protection
 
-  labels   = each.value.labels
+  labels            = each.value.labels
 }
 
 

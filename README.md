@@ -21,16 +21,17 @@ module "volume" {
 
   volumes = [
     {
-      name     = "volume-nbg1-1"
-      location = "nbg1"
-      size     = 10
-      format   = "xfs"
-      server   = {
+      name       = "volume-nbg1-1"
+      location   = "nbg1"
+      size       = 10
+      format     = "xfs"
+      protection = true
+      server     = {
         "name"      = "server-1"
         "id"        = "7569968"
         "automount" = true
       }
-      labels   = {
+      labels     = {
         "managed"    = "true"
         "managed_by" = "Terraform"
       }
@@ -71,6 +72,7 @@ See [examples](https://github.com/peterpramb/terraform-hcloud-volumes/blob/maste
 | [location](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume#location) | Location of the volume. | string | yes |
 | [size](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume#size) | Size of the volume (in GB). | number | yes |
 | [format](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume#format) | Format volume after creation. | string | no |
+| [protection](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume#delete_protection) | Protect volume from deletion. | bool | no |
 | server | Inputs for server attachment. | map([*server*](#server)) | no |
 | [labels](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/volume#labels) | Map of user-defined labels. | map(string) | no |
 
@@ -89,12 +91,13 @@ See [examples](https://github.com/peterpramb/terraform-hcloud-volumes/blob/maste
 ```terraform
 volumes = [
   {
-    name     = "volume-nbg1-1"
-    location = "nbg1"
-    size     = 10
-    format   = "xfs"
-    server   = null
-    labels   = {}
+    name       = "volume-nbg1-1"
+    location   = "nbg1"
+    size       = 10
+    format     = "xfs"
+    protection = false
+    server     = null
+    labels     = {}
   }
 ]
 ```
@@ -118,6 +121,7 @@ volumes = [
 volumes = [
   {
     "attachment" = {}
+    "delete_protection" = false
     "format" = "xfs"
     "id" = "7285086"
     "linux_device" = "/dev/disk/by-id/scsi-0HC_Volume_7285086"
@@ -130,6 +134,7 @@ volumes = [
 volume_ids = {
   "7285086" = {
     "attachment" = {}
+    "delete_protection" = false
     "format" = "xfs"
     "id" = "7285086"
     "linux_device" = "/dev/disk/by-id/scsi-0HC_Volume_7285086"
@@ -142,6 +147,7 @@ volume_ids = {
 volume_names = {
   "volume-nbg1-1" = {
     "attachment" = {}
+    "delete_protection" = false
     "format" = "xfs"
     "id" = "7285086"
     "linux_device" = "/dev/disk/by-id/scsi-0HC_Volume_7285086"
