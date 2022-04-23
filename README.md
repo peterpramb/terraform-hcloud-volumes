@@ -54,7 +54,7 @@ See [examples](https://github.com/peterpramb/terraform-hcloud-volumes/blob/maste
 
 | Name | Version |
 |------|---------|
-| [hcloud](https://registry.terraform.io/providers/hetznercloud/hcloud) | &ge; 1.20 |
+| [hcloud](https://registry.terraform.io/providers/hetznercloud/hcloud) | &ge; 1.31 |
 
 
 ## Inputs
